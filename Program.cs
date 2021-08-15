@@ -17,9 +17,7 @@ namespace MovieApp
 
             service.RentalLoop(account);
 
-            var rent = new RentalsRepo();
-
-           var me = rent.GetAccountRental("123");
+            
 
            
 

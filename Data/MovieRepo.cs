@@ -57,6 +57,28 @@ namespace MovieApp.Data
         public List<Movie> GetMovies()
         {
             return _movies;
+        } 
+        public Movie GetMovie(string movieTitle)
+        {
+            return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+        }
+
+
+        public void ShowMovieDetails(string movieTitle)
+        {
+            foreach (var movie in _movies)
+            {
+                 if (movie.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant())
+                 {
+                     Console.WriteLine($"Title: {movie.Title}");
+                     Console.WriteLine($"Director: {movie.Director}");
+                     Console.WriteLine($"Release Year: {movie.ReleaseYear}");
+                     Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
+                     Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
+                 }
+            }
+
+           
         }
 
         public void RemoveFromAllMovies(string movieTitle)
@@ -82,10 +104,7 @@ namespace MovieApp.Data
         }
 
 
-        public Movie GetMovie(string movieTitle)
-        {
-            return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
-        }
+       
 
         public void AddToAllMovies(string movieTitle)
         {

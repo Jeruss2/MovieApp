@@ -64,7 +64,7 @@ namespace MovieApp.Business
 
 
 
-            while (userInput != "6")
+            while (userInput != "8")
             {
                 Console.WriteLine();
                 Console.WriteLine($"Hi {userAccount.Name}!");
@@ -78,22 +78,30 @@ namespace MovieApp.Business
                 {
                     case "1":
                         ShowMovies();
-                        RentMovie(userAccount);
+                        BrowseMovies();
+                        ShowMovies();
                         break;
                     case "2":
-                        ExtendRental(userAccount);
+                        ShowMovies();
+                        RentMovie(userAccount);
                         break;
                     case "3":
-                        PurchaseRental(userAccount);
+                        ExtendRental(userAccount);
                         break;
                     case "4":
-                        ShowPurchasedMovies(userAccount);
+                        PurchaseRental(userAccount);
                         break;
                     case "5":
-                        ReturnRental(userAccount);
+                        ShowPurchasedMovies(userAccount);
                         break;
                     case "6":
-                        Exit(userAccount);
+                        ReturnRental(userAccount);
+                        break;
+                    case "7":
+                        Logout();
+                        break;
+                    case "8":
+                        Exit();
                         break;
 
                 }
@@ -128,6 +136,24 @@ namespace MovieApp.Business
             Console.WriteLine();
 
         }
+
+
+        //needs work - maybe a while statement to repeat until user is ready to move on
+        public void BrowseMovies()
+        {
+            var input = "";
+
+
+            Console.WriteLine();
+            Console.WriteLine("Enter the title of the movie you would like to browse.");
+
+            input = Console.ReadLine();
+
+            _movieRepo.ShowMovieDetails(input);
+            Console.WriteLine("Press any key to view list of movies");
+            Console.ReadKey();
+        }
+
 
         public void ShowPurchasedMovies(Account account)
         {
@@ -280,22 +306,36 @@ namespace MovieApp.Business
 
         }
 
-        public void Exit(Account account)
+        public void Logout()
+        {
+            Exit();
+
+            var service = new MovieRentalService();
+
+            Account account = service.Login();
+
+            service.RentalLoop(account);
+        }
+
+        public void Exit()
         {
             Console.WriteLine();
             Console.WriteLine("Thank you for renting with us!");
+            Console.WriteLine();
         }
 
         public void Menu()
         {
             Console.WriteLine("Rental Menu");
             Console.WriteLine();
-            Console.WriteLine("1. Rent");
-            Console.WriteLine("2. Extend Rental");
-            Console.WriteLine("3. Purchase Rental");
-            Console.WriteLine("4. Purchased Movies");
-            Console.WriteLine("5. Return Rental");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("1. Browse Movies");
+            Console.WriteLine("2. Rent");
+            Console.WriteLine("3. Extend Rental");
+            Console.WriteLine("4. Purchase Rental");
+            Console.WriteLine("5. Purchased Movies");
+            Console.WriteLine("6. Return Rental");
+            Console.WriteLine("7. Logout");
+            Console.WriteLine("8. Exit");
             Console.WriteLine();
         }
 
