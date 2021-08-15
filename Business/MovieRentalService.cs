@@ -64,7 +64,7 @@ namespace MovieApp.Business
 
 
 
-            while (userInput != "8")
+            while (userInput != "9")
             {
                 Console.WriteLine();
                 Console.WriteLine($"Hi {userAccount.Name}!");
@@ -98,9 +98,12 @@ namespace MovieApp.Business
                         ReturnRental(userAccount);
                         break;
                     case "7":
-                        Logout();
+                        AccountBalance(userAccount);
                         break;
                     case "8":
+                        Logout();
+                        break;
+                    case "9":
                         Exit();
                         break;
 
@@ -108,6 +111,11 @@ namespace MovieApp.Business
             }
         }
 
+        public void AccountBalance(Account account)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Account Balance: ${account.Balance}");
+        }
         public void ShowMovies()
         {
             List<Movie> instockMovies = _movieRepo.InstockMovies();
@@ -136,8 +144,6 @@ namespace MovieApp.Business
             Console.WriteLine();
 
         }
-
-
         //needs work - maybe a while statement to repeat until user is ready to move on
         public void BrowseMovies()
         {
@@ -153,7 +159,6 @@ namespace MovieApp.Business
             Console.WriteLine("Press any key to view list of movies");
             Console.ReadKey();
         }
-
 
         public void ShowPurchasedMovies(Account account)
         {
@@ -184,6 +189,8 @@ namespace MovieApp.Business
 
 
             rent.Movie = _movieRepo.GetMovie(movieSelect);
+
+            rent.Account.Balance += rent.Movie.RentalCost;
 
             _movieRepo.RemoveFromInstock(movieSelect);
             _rentalsRepo.AddRentals(rent);
@@ -233,6 +240,7 @@ namespace MovieApp.Business
                 if (rental.Movie.Title.ToLowerInvariant() == extend.ToLowerInvariant())
                 {
                     rental.DueDate = rental.DueDate.AddDays(7);
+                    rental.Account.Balance += rental.Movie.RentalCost;
                 }
 
                 Console.WriteLine($"Title: {rental.Movie.Title} Due Date: {rental.DueDate}");
@@ -264,6 +272,7 @@ namespace MovieApp.Business
                 if (rentals.Movie.Title.ToLowerInvariant() == purchase.ToLowerInvariant())
                 {
                     rentals.DueDate = DateTime.MaxValue;
+                    rentals.Account.Balance += rentals.Movie.PurchaseCost;
                     _movieRepo.AddPurchase(purchase);
                     _movieRepo.RemoveFromInstock(purchase);
                     _movieRepo.RemoveFromAllMovies(purchase);
@@ -334,8 +343,9 @@ namespace MovieApp.Business
             Console.WriteLine("4. Purchase Rental");
             Console.WriteLine("5. Purchased Movies");
             Console.WriteLine("6. Return Rental");
-            Console.WriteLine("7. Logout");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("7. Account Balance");
+            Console.WriteLine("8. Logout");
+            Console.WriteLine("9. Exit");
             Console.WriteLine();
         }
 
