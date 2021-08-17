@@ -6,6 +6,7 @@
         public int Pin { get; set; }
         public string Name { get; set; }
         public decimal Balance { get; set; }
+        public AccountTypes AccountTypes { get; set; }
 
     }
 }

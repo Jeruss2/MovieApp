@@ -17,12 +17,6 @@ namespace MovieApp
 
             service.RentalLoop(account);
 
-            
-
-           
-
-
-
         }
     }
 }

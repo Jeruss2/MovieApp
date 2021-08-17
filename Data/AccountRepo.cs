@@ -1,5 +1,4 @@
-﻿using System;
-using MovieApp.Models;
+﻿using MovieApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,8 +12,8 @@ namespace MovieApp.Data
         {
             _accounts = new List<Account>()
             {
-                new Account(){MemberNumber = "123", Pin = 123, Name = "Josh", Balance = 0.00m},
-                new Account(){MemberNumber = "456", Pin = 456, Name = "Evan", Balance = 0.00m}
+                new Account(){MemberNumber = "123", Pin = 123, Name = "Josh", Balance = 0.00m, AccountTypes = AccountTypes.Admin},
+                new Account(){MemberNumber = "456", Pin = 456, Name = "Evan", Balance = 0.00m, AccountTypes = AccountTypes.Member}
             };
         }
 
@@ -28,6 +27,19 @@ namespace MovieApp.Data
             return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber && x.Pin == pin);
         }
 
-       
+        public Account GetAcct(string acctNumber)
+        {
+            return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber);
+        }
+
+        public void AddAccount(Account account)
+        {
+            _accounts.Add(account);
+        }
+
+        public void RemoveAccount(Account account)
+        {
+            _accounts.Remove(_accounts.FirstOrDefault(x=>x.MemberNumber == account.MemberNumber));
+        }
     }
 }

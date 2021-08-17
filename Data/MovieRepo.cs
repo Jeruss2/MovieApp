@@ -1,5 +1,5 @@
-﻿using System;
-using MovieApp.Models;
+﻿using MovieApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -57,35 +57,34 @@ namespace MovieApp.Data
         public List<Movie> GetMovies()
         {
             return _movies;
-        } 
+        }
+
         public Movie GetMovie(string movieTitle)
         {
             return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
         }
 
-
         public void ShowMovieDetails(string movieTitle)
         {
             foreach (var movie in _movies)
             {
-                 if (movie.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant())
-                 {
-                     Console.WriteLine($"Title: {movie.Title}");
-                     Console.WriteLine($"Director: {movie.Director}");
-                     Console.WriteLine($"Release Year: {movie.ReleaseYear}");
-                     Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
-                     Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
-                 }
+                if (movie.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant())
+                {
+                    Console.WriteLine($"Title: {movie.Title}");
+                    Console.WriteLine($"Director: {movie.Director}");
+                    Console.WriteLine($"Release Year: {movie.ReleaseYear}");
+                    Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
+                    Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
+                }
             }
 
-           
+
         }
 
         public void RemoveFromAllMovies(string movieTitle)
         {
             _movies.Remove(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
         }
-
 
         public void AddInstockMovies(string movieTitle)
         {
@@ -103,9 +102,6 @@ namespace MovieApp.Data
             return _instockMovies;
         }
 
-
-       
-
         public void AddToAllMovies(string movieTitle)
         {
             _movies.Add(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
@@ -119,7 +115,7 @@ namespace MovieApp.Data
         public void AddPurchase(string movie)
         {
             var purchaseMovie = GetMovie(movie);
-          
+
             if (purchaseMovie.Title.Equals(movie, StringComparison.CurrentCultureIgnoreCase))
             {
                 _purchasedMovies.Add(purchaseMovie);
@@ -127,7 +123,13 @@ namespace MovieApp.Data
                 RemoveFromAllMovies(movie);
             }
 
-            
+
+        }
+
+        public void AddNewMovies(Movie movie)
+        {
+            _movies.Add(movie);
+            _instockMovies.Add(movie);
         }
 
     }
