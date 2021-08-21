@@ -1,0 +1,29 @@
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.exe
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.deps.json
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.runtimeconfig.json
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.runtimeconfig.dev.json
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\ref\MovieApp.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\System.Data.SqlClient.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Business.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Data.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Models.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Business.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Data.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp - Models.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.AssemblyReference.cache
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.AssemblyInfoInputs.cache
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.AssemblyInfo.cs
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.CoreCompileInputs.cache
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.CopyComplete
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\ref\MovieApp.dll
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.genruntimeconfig.cache
