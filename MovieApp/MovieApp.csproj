@@ -11,4 +11,10 @@
     <ProjectReference Include="..\MovieApp - Models\MovieApp - Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="configs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -2,9 +2,9 @@
 {
     public enum RentalTypes
     {
-        Rent,
-        Extend,
-        Return,
-        Purchase
+        Rent = 1,
+        Extend = 2,
+        Return = 3,
+        Purchase = 4
     }
 }

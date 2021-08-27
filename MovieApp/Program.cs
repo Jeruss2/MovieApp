@@ -1,4 +1,5 @@
-﻿using MovieApp.Business;
+﻿using System;
+using MovieApp.Business;
 using MovieApp.Data;
 using MovieApp.Models;
 using System.IO;
@@ -11,30 +12,24 @@ namespace MovieApp
         {
             string connection = File.ReadAllText("configs.txt");
 
-            var acc = new AccountRepo();
+            var acc = new AccountRepo(connection);
             var movie = new MovieRepo(connection);
-            var rental = new RentalsRepo();
+            var rental = new RentalsRepo(connection);
 
             var service = new MovieRentalService(acc, movie, rental);
 
-            Account account = service.Login();
+            //Account account = service.Login();
 
-            service.RentalLoop(account);
+            //service.RentalLoop(account);
+
+
+            
 
 
 
-            // var account = new AccountRepo();
 
-            //var theList = account.FetchAllAccounts();
 
-            //foreach (var account1 in theList)
-            //{
-            //    Console.WriteLine(account1.Name);
-            //    Console.WriteLine(account1.Pin);
-            //    Console.WriteLine(account1.Balance);
-            //    Console.WriteLine(account1.AccountTypes);
-            //    Console.WriteLine(account1.MemberNumber);
-            //}
+
 
         }
     }

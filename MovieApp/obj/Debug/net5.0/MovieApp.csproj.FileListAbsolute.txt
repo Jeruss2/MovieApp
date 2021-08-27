@@ -1,4 +1,5 @@
 C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.exe
+C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\configs.txt
 C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.deps.json
 C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.runtimeconfig.json
 C:\Users\jerus\source\repos\MovieApp\MovieApp\bin\Debug\net5.0\MovieApp.runtimeconfig.dev.json

@@ -1,0 +1,1 @@
+﻿Data Source=JERUSS2-DESKTOP\SQLEXPRESS01;Initial Catalog=Josh;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False

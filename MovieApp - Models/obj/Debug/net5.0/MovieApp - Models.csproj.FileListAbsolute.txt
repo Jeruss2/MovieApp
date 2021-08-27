@@ -14,7 +14,6 @@ C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\bin\Debug\net5.0\MovieApp
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\bin\Debug\net5.0\MovieApp - Models.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\bin\Debug\net5.0\ref\MovieApp - Models.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\bin\Debug\net5.0\MovieApp - Models.pdb
-C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.csproj.AssemblyReference.cache
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.AssemblyInfoInputs.cache
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.AssemblyInfo.cs
@@ -22,3 +21,4 @@ C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\ref\MovieApp - Models.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp - Models\obj\Debug\net5.0\MovieApp - Models.csproj.AssemblyReference.cache

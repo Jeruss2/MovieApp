@@ -1,6 +1,7 @@
 ﻿using MovieApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 
@@ -22,6 +23,9 @@ namespace MovieApp.Data
             }
 
             _connectionString = connectionString;
+            _movies = new List<Movie>();
+            _instockMovies = new List<Movie>();
+            _purchasedMovies = new List<Movie>();
         }
 
         public MovieRepo()
@@ -29,11 +33,11 @@ namespace MovieApp.Data
 
             _movies = new List<Movie>()
             {
-                new Movie(){Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3, PurchaseCost = 5, InStock = true},
-                new Movie(){Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3, PurchaseCost = 5, InStock = true},
-                new Movie(){Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10, InStock = true},
-                new Movie(){Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true},
-                new Movie(){Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true}
+                //new Movie(){Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3, PurchaseCost = 5, InStock = true},
+                //new Movie(){Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3, PurchaseCost = 5, InStock = true},
+                //new Movie(){Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10, InStock = true},
+                //new Movie(){Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true},
+                //new Movie(){Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true}
             };
             _instockMovies = new List<Movie>()
             {
@@ -69,19 +73,203 @@ namespace MovieApp.Data
             //_connectionString = @"Data Source=JERUSS2-DESKTOP\SQLEXPRESS01;Initial Catalog=Josh;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
-        public List<Movie> GetMovies()
+        //public List<Movie> GetMovies()
+        //{
+        //    return _movies;
+        //}
+
+        public List<Movie> FetchAllMovies()
         {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = "Select * from dbo.Movie";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Movie movie = new Movie();
+                        movie.Title = reader.GetString(0);
+                        movie.Director = reader.GetString(1);
+                        movie.ReleaseYear = reader.GetInt32(2);
+                        movie.RentalCost = reader.GetInt32(3);
+                        movie.PurchaseCost = reader.GetInt32(4);
+                        movie.InStock = reader.GetBoolean(5);
+
+                        _movies.Add(movie);
+
+                    }
+                }
+            }
+
             return _movies;
+
         }
 
-        //public List<Account> FetchAllMovies()
+        //public Movie GetMovie(string movieTitle)
         //{
+        //    return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+        //}
+
+        public Movie FetchMovie(string movieTitle)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = "Select * from dbo.Movie";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                Movie movie = new Movie();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        movie.Title = reader.GetString(0);
+                        movie.Director = reader.GetString(1);
+                        movie.ReleaseYear = reader.GetInt32(2);
+                        movie.RentalCost = reader.GetInt32(3);
+                        movie.PurchaseCost = reader.GetInt32(4);
+                        movie.InStock = reader.GetBoolean(5);
+
+                        _movies.Add(movie);
+
+                    }
+                }
+            }
+
+            return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+        }
+
+
+        public void DisplayMovieDetails(Movie movie)
+        {
+            Console.WriteLine($"Title: {movie.Title}");
+            Console.WriteLine($"Director: {movie.Director}");
+            Console.WriteLine($"Release Year: {movie.ReleaseYear}");
+            Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
+            Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
+
+        }
+
+
+        //public void ShowMovieDetails(string movieTitle)
+        //{
+        //    foreach (var movie in _movies)
+        //    {
+        //        if (movie.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant())
+        //        {
+        //            Console.WriteLine($"Title: {movie.Title}");
+        //            Console.WriteLine($"Director: {movie.Director}");
+        //            Console.WriteLine($"Release Year: {movie.ReleaseYear}");
+        //            Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
+        //            Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
+        //        }
+        //    }
+
+
+        //}
+
+        //public void RemoveFromAllMovies(string movieTitle)
+        //{
+        //    _movies.Remove(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
+        //}
+        public void AddToAllMovies(Movie movie)
+        {
+            string titleMovie = movie.Title;
+            string director = movie.Director;
+            int releaseYear = movie.ReleaseYear;
+            int rentalCost = movie.RentalCost;
+            int purchaseCost = movie.RentalCost;
+            bool instock = movie.InStock;
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Insert into dbo.Movie values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+                command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
+                command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
+                command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
+                command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
+                command.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+        public void DeleteFromAllMovies(Movie movie)
+        {
+            string titleMovie = movie.Title;
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Delete from dbo.Movie where Title = @Title";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        //public void AddInstockMovies(string movieTitle)
+        //{
+        //    //_instockMovies.Add(_instockMovies.FirstOrDefault(x =>
+        //    //    x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
+
+        //    string titleMovie = "";
+        //    string director = "";
+        //    int releaseYear = 0;
+        //    int rentalCost = 0;
+        //    int purchaseCost = 0;
+        //    bool instock = true;
+
+
 
         //    using (SqlConnection connection = new SqlConnection(_connectionString))
         //    {
-        //        var sqlQuery = "Select * from dbo.Movie";
+
+        //        var sqlQuery1 = "Insert into dbo.InstockMovies values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+
+        //        SqlCommand command1 = new SqlCommand(sqlQuery1, connection);
+
+        //        command1.Parameters.Add("@TitleMovie", System.Data.SqlDbType.VarChar).Value = titleMovie;
+        //        command1.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
+        //        command1.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
+        //        command1.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
+        //        command1.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
+        //        command1.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
+
+
+
+        //        var sqlQuery = "Select * from dbo.Movies where Title = @movieTitle";
 
         //        SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+
+        //        command.Parameters.Add("@movieTitle", System.Data.SqlDbType.VarChar).Value = movieTitle;
 
         //        connection.Open();
         //        SqlDataReader reader = command.ExecuteReader();
@@ -90,90 +278,219 @@ namespace MovieApp.Data
         //        {
         //            while (reader.Read())
         //            {
-        //                Movie movie = new Movie();
-        //                movie.Title = reader.GetString(0);
-        //                movie.Director = reader.GetString(1);
-        //                movie.ReleaseYear = reader.GetInt32(2);
-        //                movie.RentalCost = reader.GetInt32(3);
-        //                movie.PurchaseCost = reader.GetInt32(4);
-        //                movie.InStock = reader.GetBoolean(5);
+        //                //Movie movie = new Movie();
+        //                //movie.Title = reader.GetString(0);
+        //                //movie.Director = reader.GetString(1);
+        //                //movie.ReleaseYear = reader.GetInt32(2);
+        //                //movie.RentalCost = reader.GetInt32(3);
+        //                //movie.PurchaseCost = reader.GetInt32(4);
+        //                //movie.InStock = reader.GetBoolean(5);
 
 
+        //                //_instockMovies.Add(movie);
+
+
+
+        //                titleMovie = reader.GetString(0);
+        //                director = reader.GetString(1);
+        //                releaseYear = reader.GetInt32(2);
+        //                rentalCost = reader.GetInt32(3);
+        //                purchaseCost = reader.GetInt32(4);
+        //                instock = reader.GetBoolean(5);
+
+        //                command1.ExecuteNonQuery();
 
 
         //            }
         //        }
+
+
         //    }
-
-        //    return _movies;
-
         //}
 
-        public Movie GetMovie(string movieTitle)
+        public void InsertIntoInstockMovies(Movie movie)
         {
-            return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+            string titleMovie = movie.Title;
+            string director = movie.Director;
+            int releaseYear = movie.ReleaseYear;
+            int rentalCost = movie.RentalCost;
+            int purchaseCost = movie.RentalCost;
+            bool instock = movie.InStock;
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Insert into dbo.InstockMovies values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+                command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
+                command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
+                command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
+                command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
+                command.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
         }
 
-        public void ShowMovieDetails(string movieTitle)
+        public Movie GetMovieObj(string movieTitle)
         {
-            foreach (var movie in _movies)
+
+            var movie = new Movie();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                if (movie.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant())
+
+                var sqlQuery = "Select * from dbo.MasterListOfMovies where Title = @movieTitle";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+
+                command.Parameters.Add("@movieTitle", System.Data.SqlDbType.VarChar).Value = movieTitle;
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+
+
+                if (reader.HasRows)
                 {
-                    Console.WriteLine($"Title: {movie.Title}");
-                    Console.WriteLine($"Director: {movie.Director}");
-                    Console.WriteLine($"Release Year: {movie.ReleaseYear}");
-                    Console.WriteLine($"Rental Cost: ${movie.RentalCost}");
-                    Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
+                    while (reader.Read())
+                    {
+
+
+                        movie.Title = reader.GetString(0);
+                        movie.Director = reader.GetString(1);
+                        movie.ReleaseYear = reader.GetInt32(2);
+                        movie.RentalCost = reader.GetInt32(3);
+                        movie.PurchaseCost = reader.GetInt32(4);
+                        movie.InStock = reader.GetBoolean(5);
+
+
+                    }
+                }
+
+
+            }
+
+            return movie;
+
+
+        }
+
+        public void RemoveFromInstock(Movie movie)
+        {
+
+            string titleMovie = movie.Title;
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Delete from dbo.InstockMovies where Title = @Title";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+
+        }
+
+        //Need to look at this one to return all w/o list.
+        public List<Movie> FetchInstockMovies()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = "Select * from dbo.InstockMovies";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Movie movie = new Movie();
+                        movie.Title = reader.GetString(0);
+                        movie.Director = reader.GetString(1);
+                        movie.ReleaseYear = reader.GetInt32(2);
+                        movie.RentalCost = reader.GetInt32(3);
+                        movie.PurchaseCost = reader.GetInt32(4);
+                        movie.InStock = reader.GetBoolean(5);
+
+                        _instockMovies.Add(movie);
+
+                    }
                 }
             }
 
-
-        }
-
-        public void RemoveFromAllMovies(string movieTitle)
-        {
-            _movies.Remove(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
-        }
-
-        public void AddInstockMovies(string movieTitle)
-        {
-            _instockMovies.Add(_instockMovies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
-        }
-
-        public void RemoveFromInstock(string movieTitle)
-        {
-            _instockMovies.Remove(_instockMovies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
-        }
-
-        //Figure out a way to add movies that inStock = true; to this list.
-        public List<Movie> InstockMovies()
-        {
             return _instockMovies;
         }
 
-        public void AddToAllMovies(string movieTitle)
-        {
-            _movies.Add(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
-        }
-
+        //Need to look at this one to return all w/o list.
         public List<Movie> GetPurchaseList()
         {
             return _purchasedMovies;
         }
 
-        public void AddPurchase(string movie)
+
+        //public void AddPurchase(string movie)
+        //{
+        //    var purchaseMovie = GetMovie(movie);
+
+        //    if (purchaseMovie.Title.Equals(movie, StringComparison.CurrentCultureIgnoreCase))
+        //    {
+        //        _purchasedMovies.Add(purchaseMovie);
+        //        RemoveFromInstock(movie);
+        //        RemoveFromAllMovies(movie);
+        //    }
+
+
+        //}
+
+        public void InsertIntoPurchase(Movie movie)
         {
-            var purchaseMovie = GetMovie(movie);
+            string titleMovie = movie.Title;
+            string director = movie.Director;
+            int releaseYear = movie.ReleaseYear;
+            int rentalCost = movie.RentalCost;
+            int purchaseCost = movie.RentalCost;
+            bool instock = movie.InStock;
 
-            if (purchaseMovie.Title.Equals(movie, StringComparison.CurrentCultureIgnoreCase))
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                _purchasedMovies.Add(purchaseMovie);
-                RemoveFromInstock(movie);
-                RemoveFromAllMovies(movie);
+
+                var sqlQuery =
+                    "Insert into dbo.PurchasedMovies values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+                command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
+                command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
+                command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
+                command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
+                command.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+
             }
-
-
         }
 
         public void AddNewMovies(Movie movie)
@@ -182,5 +499,44 @@ namespace MovieApp.Data
             _instockMovies.Add(movie);
         }
 
+        //Need to refactor this - really ugly right now
+        public void CreateNewMovie(Movie movie)
+        {
+            // access the database
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                string sqlQuery =
+                    "Insert into dbo.Movie Values(@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+                string sqlQuery1 =
+                    "Insert into dbo.MasterListOfMovies Values(@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+
+
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlCommand command1 = new SqlCommand(sqlQuery1, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar, 50).Value = movie.Title;
+                command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar, 50).Value = movie.Director;
+                command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int, 50).Value = movie.ReleaseYear;
+                command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int, 50).Value = movie.RentalCost;
+                command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int, 50).Value = movie.PurchaseCost;
+                command.Parameters.Add("@Instock", System.Data.SqlDbType.Bit, 50).Value = movie.InStock;
+
+                command1.Parameters.Add("@Title", System.Data.SqlDbType.VarChar, 50).Value = movie.Title;
+                command1.Parameters.Add("@Director", System.Data.SqlDbType.VarChar, 50).Value = movie.Director;
+                command1.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int, 50).Value = movie.ReleaseYear;
+                command1.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int, 50).Value = movie.RentalCost;
+                command1.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int, 50).Value = movie.PurchaseCost;
+                command1.Parameters.Add("@Instock", System.Data.SqlDbType.Bit, 50).Value = movie.InStock;
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                command1.ExecuteNonQuery();
+
+            }
+
+        }
     }
 }
