@@ -1,8 +1,8 @@
 ﻿using MovieApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 
 namespace MovieApp.Data
@@ -28,50 +28,50 @@ namespace MovieApp.Data
             _purchasedMovies = new List<Movie>();
         }
 
-        public MovieRepo()
-        {
+        //public MovieRepo()
+        //{
 
-            _movies = new List<Movie>()
-            {
-                //new Movie(){Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3, PurchaseCost = 5, InStock = true},
-                //new Movie(){Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3, PurchaseCost = 5, InStock = true},
-                //new Movie(){Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10, InStock = true},
-                //new Movie(){Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true},
-                //new Movie(){Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true}
-            };
-            _instockMovies = new List<Movie>()
-            {
-                new Movie()
-                {
-                    Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3,
-                    PurchaseCost = 5, InStock = true
-                },
-                new Movie()
-                {
-                    Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3,
-                    PurchaseCost = 5, InStock = true
-                },
-                new Movie()
-                {
-                    Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10,
-                    InStock = true
-                },
-                new Movie()
-                {
-                    Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10,
-                    PurchaseCost = 20, InStock = true
-                },
-                new Movie()
-                {
-                    Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10,
-                    PurchaseCost = 20, InStock = true
-                }
-            };
+        //    _movies = new List<Movie>()
+        //    {
+        //        //new Movie(){Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3, PurchaseCost = 5, InStock = true},
+        //        //new Movie(){Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3, PurchaseCost = 5, InStock = true},
+        //        //new Movie(){Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10, InStock = true},
+        //        //new Movie(){Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true},
+        //        //new Movie(){Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10, PurchaseCost = 20, InStock = true}
+        //    };
+        //    _instockMovies = new List<Movie>()
+        //    {
+        //        new Movie()
+        //        {
+        //            Title = "Troy", Director = "Wolfgang Petersen", ReleaseYear = 2004, RentalCost = 3,
+        //            PurchaseCost = 5, InStock = true
+        //        },
+        //        new Movie()
+        //        {
+        //            Title = "Patriot", Director = "Roland Emmerich", ReleaseYear = 2000, RentalCost = 3,
+        //            PurchaseCost = 5, InStock = true
+        //        },
+        //        new Movie()
+        //        {
+        //            Title = "Avatar", Director = "James Cameron", ReleaseYear = 2009, RentalCost = 5, PurchaseCost = 10,
+        //            InStock = true
+        //        },
+        //        new Movie()
+        //        {
+        //            Title = "Jungle Cruise", Director = "Jaume Collet-Serra", ReleaseYear = 2021, RentalCost = 10,
+        //            PurchaseCost = 20, InStock = true
+        //        },
+        //        new Movie()
+        //        {
+        //            Title = "Black Widow", Director = "Cate Strickland", ReleaseYear = 2021, RentalCost = 10,
+        //            PurchaseCost = 20, InStock = true
+        //        }
+        //    };
 
-            _purchasedMovies = new List<Movie>();
+        //    _purchasedMovies = new List<Movie>();
 
-            //_connectionString = @"Data Source=JERUSS2-DESKTOP\SQLEXPRESS01;Initial Catalog=Josh;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        }
+        //    //_connectionString = @"Data Source=JERUSS2-DESKTOP\SQLEXPRESS01;Initial Catalog=Josh;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //}
 
         //public List<Movie> GetMovies()
         //{
@@ -94,13 +94,16 @@ namespace MovieApp.Data
                 {
                     while (reader.Read())
                     {
+
                         Movie movie = new Movie();
+
                         movie.Title = reader.GetString(0);
                         movie.Director = reader.GetString(1);
                         movie.ReleaseYear = reader.GetInt32(2);
                         movie.RentalCost = reader.GetInt32(3);
                         movie.PurchaseCost = reader.GetInt32(4);
                         movie.InStock = reader.GetBoolean(5);
+
 
                         _movies.Add(movie);
 
@@ -119,16 +122,19 @@ namespace MovieApp.Data
 
         public Movie FetchMovie(string movieTitle)
         {
+            Movie movie = new Movie();
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "Select * from dbo.Movie";
+                var sqlQuery = "Select * from dbo.Movie where Title = @Title";
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", SqlDbType.VarChar).Value = movieTitle;
 
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                Movie movie = new Movie();
 
                 if (reader.HasRows)
                 {
@@ -148,7 +154,10 @@ namespace MovieApp.Data
                 }
             }
 
-            return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+            //return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
+
+
+            return movie;
         }
 
 
@@ -404,7 +413,40 @@ namespace MovieApp.Data
 
             }
 
+
+            var findTitle = _instockMovies.Find(x => x.Title == titleMovie);
+
+            _instockMovies.Remove(findTitle);
+
         }
+
+        public void RemoveFromAllMovies(Movie movie)
+        {
+
+            string titleMovie = movie.Title;
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Delete from dbo.Movie where Title = @Title";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+
+
+            var findTitle = _instockMovies.Find(x => x.Title == titleMovie);
+
+            _movies.Remove(findTitle);
+
+        }
+
 
         //Need to look at this one to return all w/o list.
         public List<Movie> FetchInstockMovies()
@@ -422,6 +464,7 @@ namespace MovieApp.Data
                 {
                     while (reader.Read())
                     {
+
                         Movie movie = new Movie();
                         movie.Title = reader.GetString(0);
                         movie.Director = reader.GetString(1);
@@ -431,7 +474,6 @@ namespace MovieApp.Data
                         movie.InStock = reader.GetBoolean(5);
 
                         _instockMovies.Add(movie);
-
                     }
                 }
             }

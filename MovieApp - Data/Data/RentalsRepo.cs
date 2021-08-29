@@ -1,6 +1,7 @@
 ﻿using MovieApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace MovieApp.Data
 
         private List<Rentals> _rentals;
         private string _connectionString;
-        private List<RentalsRepoTest> _rentalsTests;
+        //private List<RentalsRepoTest> _rentalsTests;
 
 
 
@@ -25,7 +26,7 @@ namespace MovieApp.Data
             _connectionString = connectionString;
 
             _rentals = new List<Rentals>();
-            _rentalsTests = new List<RentalsRepoTest>();
+            //_rentalsTests = new List<RentalsRepoTest>();
         }
 
 
@@ -39,11 +40,12 @@ namespace MovieApp.Data
         public List<Rentals> GetAccountRental(string acctNumber)
         {
             return _rentals.Where(x => x.Account.MemberNumber == acctNumber).OrderBy(x => x.DueDate).ToList();
+
+            //return _rentalsTests.Where(x => x.Account == acctNumber).OrderBy(x => x.DueDate).ToList();
         }
 
-        public List<RentalsRepoTest> FetchAccountRental(string acctNumber)
+        public List<Rentals> FetchAccountRental(string acctNumber)
         {
-            
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -62,36 +64,30 @@ namespace MovieApp.Data
                 {
                     while (reader.Read())
                     {
-                        RentalsRepoTest rentals = new RentalsRepoTest();
+                        //RentalsRepoTest rentals = new RentalsRepoTest();
 
-                        rentals.Account = reader["Account"].ToString();
-                        rentals.Movie = reader["Movie"].ToString();
-                        //rentals.RentalTypes = reader.GetInt32(2);
+                        Rentals rentals = new Rentals();
+
+                        rentals.Account = new Account();
+                        rentals.Movie = new Movie();
+
+
+                        rentals.Account.MemberNumber = reader["Account"].ToString();
+                        rentals.Movie.Title = reader["Movie"].ToString();
+                        rentals.RentalTypes = reader.GetInt32(2);
                         rentals.RentalDate = reader.GetDateTime(3);
                         rentals.DueDate = reader.GetDateTime(4);
-                        
 
 
-
-                        //var account = reader["Account"].ToString();
-                        //var movie = reader["Movie"].ToString();
-                        //var rentalDate = reader["RentalDate"].ToString();
-                        //var dueDate = reader["DueDate"].ToString();
-
-                        //rentalList.Add(account);
-                        //rentalList.Add(movie);
-                        //rentalList.Add(rentalDate);
-                        //rentalList.Add(dueDate);
-
-
-                        _rentalsTests.Add(rentals);
-
+                        _rentals.Add(rentals);
 
                     }
                 }
             }
 
-            return _rentalsTests;
+
+
+            return _rentals;
         }
 
         //Adds rentals to the list
@@ -122,7 +118,7 @@ namespace MovieApp.Data
         }
         //Changing the repo for this one - testing it out to see if it works!
         //changed RentalRepo to RentalRepoTest
-        public void RemoveRentals(RentalsRepoTest rentalsList)
+        public void RemoveRentals(Rentals rentalsList)
         {
 
 
@@ -134,15 +130,18 @@ namespace MovieApp.Data
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
 
 
-                command.Parameters.Add("@Movie", System.Data.SqlDbType.VarChar, 50).Value = rentalsList.Movie/*.Title*/;
+                command.Parameters.Add("@Movie", System.Data.SqlDbType.VarChar, 50).Value = rentalsList.Movie.Title;
 
                 connection.Open();
                 command.ExecuteNonQuery();
             }
 
 
-            //_rentals.Remove(_rentals.FirstOrDefault(x =>
-            //    x.Movie.Title.ToLowerInvariant() == rentalsList.Movie.Title.ToLowerInvariant()));
+            //_rentalsTests.Remove(_rentalsTests.FirstOrDefault(x =>
+            //    x.Movie.ToLowerInvariant() == rentalsList.Movie.ToLowerInvariant()));
+
+            _rentals.Remove(_rentals.FirstOrDefault(x =>
+                x.Movie.Title.ToLowerInvariant() == rentalsList.Movie.Title.ToLowerInvariant()));
         }
 
 

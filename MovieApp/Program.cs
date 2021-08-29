@@ -18,12 +18,10 @@ namespace MovieApp
 
             var service = new MovieRentalService(acc, movie, rental);
 
-            //Account account = service.Login();
+            Account account = service.Login();
 
-            //service.RentalLoop(account);
+            service.RentalLoop(account);
 
-
-            
 
 
 

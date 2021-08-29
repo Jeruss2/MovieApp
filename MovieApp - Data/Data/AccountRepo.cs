@@ -90,6 +90,7 @@ namespace MovieApp.Data
 
                 Account account = new Account();
 
+
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -111,6 +112,10 @@ namespace MovieApp.Data
                     }
                 }
 
+                if (account.Name == null)
+                {
+                    account = null;
+                }
                 return account;
             }
 
@@ -183,11 +188,9 @@ namespace MovieApp.Data
             // access the database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                //string sqlQuery = "";
 
                 string sqlQuery =
                      "Insert into dbo.Account Values(@MemberNumber, @Pin, @Name, @Balance, @AccountTypes)";
-                //: "Update dbo.Account set Pin = @Pin, Name = @Name, Balance = @Balance, AccountTypes = @AccountTypes where MemberNumber = @MemberNumber";
 
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
