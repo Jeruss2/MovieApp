@@ -11,8 +11,8 @@ namespace MovieApp.Models
         public int RentalTypes { get; set; }
         public DateTime RentalDate { get; set; }
         public DateTime DueDate { get; set; }
-
-
+        public string AccountId { get; set; }
+        public string MovieId { get; set; }
 
 
 

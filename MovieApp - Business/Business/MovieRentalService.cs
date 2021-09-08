@@ -1,7 +1,9 @@
 ﻿using MovieApp.Data;
 using MovieApp.Models;
+using MovieApp___Business;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace MovieApp.Business
@@ -13,11 +15,13 @@ namespace MovieApp.Business
         private RentalsRepo _rentalsRepo;
 
 
+
         public MovieRentalService(AccountRepo accountRepo, MovieRepo movieRepo, RentalsRepo rentalsRepo)
         {
             _accountRepo = accountRepo;
             _movieRepo = movieRepo;
             _rentalsRepo = rentalsRepo;
+
         }
 
         //Need to fix login to exit after number of tries
@@ -203,7 +207,8 @@ namespace MovieApp.Business
         {
             //var accountsList = _accountRepo.GetAccounts();
 
-            var accountsList = _accountRepo.FetchAllAccounts();
+            var accountsList = _accountRepo.FetchAllAccounts().GroupBy(x => x.MemberNumber).Select(y => y.First());
+
 
             foreach (var account in accountsList)
             {
@@ -378,7 +383,10 @@ namespace MovieApp.Business
             //foreach (var movie in instock)
             //{
 
-            rent.Movie = _movieRepo.FetchMovie(movieSelect);
+            DataCache dc = new DataCache(_movieRepo);
+
+            rent.Movie = dc.FetchMovie(movieSelect);
+
 
             //foreach (var movie in instock)
             //{
@@ -390,7 +398,7 @@ namespace MovieApp.Business
             //     }
             //}
 
-           
+
 
             // rent.Account.Balance += rent.Movie.RentalCost;
 
@@ -404,7 +412,7 @@ namespace MovieApp.Business
             var myRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
 
             _movieRepo.RemoveFromInstock(rent.Movie);
-            
+
 
             _accountRepo.Edit(rent.Account);
 
@@ -535,7 +543,7 @@ namespace MovieApp.Business
                     _movieRepo.InsertIntoInstockMovies(movie);
                     //_movieRepo.AddToAllMovies(returnedMovie);
                     _rentalsRepo.RemoveRentals(returnRental);
-                    
+
                 }
             }
 

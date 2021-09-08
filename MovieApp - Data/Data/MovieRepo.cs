@@ -1,9 +1,9 @@
 ﻿using MovieApp.Models;
+using MovieApp___Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
 
 namespace MovieApp.Data
 {
@@ -14,6 +14,7 @@ namespace MovieApp.Data
         private List<Movie> _instockMovies;
         private List<Movie> _purchasedMovies;
         private string _connectionString;
+
 
         public MovieRepo(string connectionString)
         {
@@ -122,7 +123,8 @@ namespace MovieApp.Data
 
         public Movie FetchMovie(string movieTitle)
         {
-            Movie movie = new Movie();
+            //Movie movie = new Movie();
+            var m = new Movie();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -136,28 +138,32 @@ namespace MovieApp.Data
                 SqlDataReader reader = command.ExecuteReader();
 
 
-                if (reader.HasRows)
+                if (reader.HasRows && reader.Read())
                 {
-                    while (reader.Read())
-                    {
+                    m = ReadMovie(reader);
 
-                        movie.Title = reader.GetString(0);
-                        movie.Director = reader.GetString(1);
-                        movie.ReleaseYear = reader.GetInt32(2);
-                        movie.RentalCost = reader.GetInt32(3);
-                        movie.PurchaseCost = reader.GetInt32(4);
-                        movie.InStock = reader.GetBoolean(5);
+                    return m;
+                    //movie.Title = reader.GetString(0);
+                    //movie.Director = reader.GetString(1);
+                    //movie.ReleaseYear = reader.GetInt32(2);
+                    //movie.RentalCost = reader.GetInt32(3);
+                    //movie.PurchaseCost = reader.GetInt32(4);
+                    //movie.InStock = reader.GetBoolean(5);
 
-                        _movies.Add(movie);
+                    //_movies.Add(movie);
 
-                    }
                 }
+
             }
+
 
             //return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
 
 
-            return movie;
+            //return movie;
+
+            return m;
+
         }
 
 
@@ -552,11 +558,13 @@ namespace MovieApp.Data
                     "Insert into dbo.Movie Values(@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
                 string sqlQuery1 =
                     "Insert into dbo.MasterListOfMovies Values(@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
-
+                string sqlQuery2 =
+                    "Insert into dbo.InstockMovies Values(@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
 
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
                 SqlCommand command1 = new SqlCommand(sqlQuery1, connection);
+                SqlCommand command2 = new SqlCommand(sqlQuery2, connection);
 
                 command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar, 50).Value = movie.Title;
                 command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar, 50).Value = movie.Director;
@@ -571,14 +579,37 @@ namespace MovieApp.Data
                 command1.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int, 50).Value = movie.RentalCost;
                 command1.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int, 50).Value = movie.PurchaseCost;
                 command1.Parameters.Add("@Instock", System.Data.SqlDbType.Bit, 50).Value = movie.InStock;
-
+                
+                
+                command2.Parameters.Add("@Title", System.Data.SqlDbType.VarChar, 50).Value = movie.Title;
+                command2.Parameters.Add("@Director", System.Data.SqlDbType.VarChar, 50).Value = movie.Director;
+                command2.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int, 50).Value = movie.ReleaseYear;
+                command2.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int, 50).Value = movie.RentalCost;
+                command2.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int, 50).Value = movie.PurchaseCost;
+                command2.Parameters.Add("@Instock", System.Data.SqlDbType.Bit, 50).Value = movie.InStock;
 
                 connection.Open();
                 command.ExecuteNonQuery();
                 command1.ExecuteNonQuery();
-
+                command2.ExecuteNonQuery();
             }
 
+        }
+
+        private Movie ReadMovie(SqlDataReader reader)
+        {
+            Movie movie = new Movie();
+
+            //movie.GetTotleAndDirtector();
+
+            movie.Title = reader.GetValue<string>("Title");
+            movie.Director = reader.GetString(1);
+            movie.ReleaseYear = reader.GetInt32(2);
+            movie.RentalCost = reader.GetInt32(3);
+            movie.PurchaseCost = reader.GetInt32(4);
+            movie.InStock = reader.GetBoolean(5);
+
+            return movie;
         }
     }
 }

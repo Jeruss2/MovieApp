@@ -3,6 +3,7 @@ using MovieApp.Business;
 using MovieApp.Data;
 using MovieApp.Models;
 using System.IO;
+using MovieApp___Business;
 
 namespace MovieApp
 {
@@ -15,6 +16,10 @@ namespace MovieApp
             var acc = new AccountRepo(connection);
             var movie = new MovieRepo(connection);
             var rental = new RentalsRepo(connection);
+            
+           
+           
+            
 
             var service = new MovieRentalService(acc, movie, rental);
 
@@ -23,6 +28,11 @@ namespace MovieApp
             service.RentalLoop(account);
 
 
+
+            //var troy = movie.FetchMovie("Troy");
+
+            //Console.WriteLine(troy.Title);
+            //Console.WriteLine(troy.Director);
 
 
 

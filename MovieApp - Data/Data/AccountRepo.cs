@@ -1,5 +1,5 @@
-﻿using System;
-using MovieApp.Models;
+﻿using MovieApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace MovieApp.Data
                 //new Account(){MemberNumber = "456", Pin = 456, Name = "Evan", Balance = 0.00m, AccountTypes = AccountTypes.Member}
             };
 
-            
+
         }
 
 
@@ -61,8 +61,10 @@ namespace MovieApp.Data
                         account.AccountTypes = reader.GetString(4);
 
                         _accounts.Add(account);
+                        
                     }
                 }
+
             }
 
             return _accounts;
@@ -262,6 +264,8 @@ namespace MovieApp.Data
 
 
             }
+
+            _accounts.Remove(account);
         }
 
 
