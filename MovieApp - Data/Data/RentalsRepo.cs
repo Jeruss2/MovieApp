@@ -15,7 +15,6 @@ namespace MovieApp.Data
         //private List<RentalsRepoTest> _rentalsTests;
 
 
-
         public RentalsRepo(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
@@ -85,8 +84,6 @@ namespace MovieApp.Data
                 }
             }
 
-
-
             return _rentals;
         }
 
@@ -142,6 +139,30 @@ namespace MovieApp.Data
 
             _rentals.Remove(_rentals.FirstOrDefault(x =>
                 x.Movie.Title.ToLowerInvariant() == rentalsList.Movie.Title.ToLowerInvariant()));
+        }
+
+
+        public void UpdateDueDate(string movieTitle, string memberNumber)
+        {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                var sqlQuery = "Update dbo.Rentals set DueDate = DATEADD(day, 7, DueDate) where Movie = @movieTitle and Account = @memberNumber";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+
+                command.Parameters.Add("@movieTitle", System.Data.SqlDbType.VarChar, 50).Value = movieTitle;
+
+                command.Parameters.Add("@memberNumber", System.Data.SqlDbType.VarChar, 50).Value = memberNumber;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+
+
+
         }
 
 

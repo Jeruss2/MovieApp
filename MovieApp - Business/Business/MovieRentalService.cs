@@ -324,16 +324,36 @@ namespace MovieApp.Business
         {
             var input = "";
 
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Enter the title of the movie you would like to browse.");
 
-            Console.WriteLine();
-            Console.WriteLine("Enter the title of the movie you would like to browse.");
+                input = Console.ReadLine();
 
-            input = Console.ReadLine();
+                Console.WriteLine();
 
-            var movie = _movieRepo.GetMovieObj(input);
-            _movieRepo.DisplayMovieDetails(movie);
-            Console.WriteLine("Press any key to view list of movies");
-            Console.ReadKey();
+                var movie = _movieRepo.GetMovieObj(input);
+
+                if (string.IsNullOrWhiteSpace(movie.Title))
+                {
+                    Console.WriteLine("The movie you have selected is not on our list.");
+
+                }
+                else
+                {
+                    _movieRepo.DisplayMovieDetails(movie);
+                    Console.WriteLine("Press any key to view list of movies");
+                    Console.ReadKey();
+                }
+
+
+                if (input == "Exit")
+                {
+                    break;
+                }
+            }
+
         }
 
         public void ShowPurchasedMovies(Account account)
@@ -354,83 +374,63 @@ namespace MovieApp.Business
 
             var rent = new Rentals();
 
-            //var rent = new RentalsRepoTest();
-
             rent.Account = account;
 
-            //rent.Account = account.ToString();
-            //rent.RentalTypes = RentalTypes.Rent;
             rent.RentalDate = DateTime.Now;
             rent.DueDate = DateTime.Now.AddDays(7);
 
-            Console.WriteLine("Enter the title of the movie you would like to rent");
+            // do while - compare to list of movies
 
-            movieSelect = Console.ReadLine();
-
-
-            /*rent.Movie = _movieRepo.GetMovie(movieSelect)*/
-            //var instock = _movieRepo.FetchInstockMovies();
-
-            //var check = instock.Select(x => x.Title == movieSelect);
-
-            //if (check.Contains(false))
-            //{
-            //  Console.WriteLine();
-            //    Console.WriteLine("The movie you selected is out of stock.");
-            //}
+            var instock = _movieRepo.FetchinstockMovieList() ?? _movieRepo.FetchInstockMovies();
 
 
-            //foreach (var movie in instock)
-            //{
+            var matches = "";
+
+
+            while (true)
+            {
+                Console.WriteLine("Enter the title of the movie you would like to rent");
+
+                movieSelect = Console.ReadLine();
+
+                // matches = instock.Where(x => x.Title == movieSelect).ToString();
+
+                if (instock.Any(x => x.Title.Equals(movieSelect, StringComparison.OrdinalIgnoreCase)))
+                {
+                    break;
+                }
+
+            }
+
 
             DataCache dc = new DataCache(_movieRepo);
 
             rent.Movie = dc.FetchMovie(movieSelect);
 
-
-            //foreach (var movie in instock)
-            //{
-            //     if (movie.Title)
-            //     {
-            //         Console.WriteLine();
-            //         Console.WriteLine("The movie you selected is out of stock.");
-            //         return;
-            //     }
-            //}
-
-
-
-            // rent.Account.Balance += rent.Movie.RentalCost;
-
             account.Balance += rent.Movie.RentalCost;
 
-            //_movieRepo.RemoveFromInstock(movieSelect);
             _rentalsRepo.AddRentals(rent);
 
-            //var myRentals = _rentalsRepo.GetAccountRental(account.MemberNumber);
-
             var myRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
+
+            //FetchAccountRental
 
             _movieRepo.RemoveFromInstock(rent.Movie);
 
 
             _accountRepo.Edit(rent.Account);
 
-            //myRentals.Sort((x, y) => DateTime.Compare(x.DueDate, y.DueDate));
 
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
-            foreach (var rental in myRentals)
+            foreach (var rental in myRentals.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
             {
                 Console.WriteLine();
                 Console.WriteLine($"Movie: {rental.Movie.Title} Due Date: {rental.DueDate}");
                 Console.WriteLine();
             }
-            //}
 
-
-            //Console.WriteLine($"Movie: {myRentals[1]} Due Date: {myRentals[3]}");
 
         }
 
@@ -438,13 +438,18 @@ namespace MovieApp.Business
         {
             var rentalExtension = _rentalsRepo.GetAccountRental(account.MemberNumber);
 
+            if (rentalExtension.Count == 0)
+            {
+                rentalExtension = _rentalsRepo.FetchAccountRental(account.MemberNumber);
+            }
+
 
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
-            foreach (var rentals in rentalExtension)
+            foreach (var rentals in rentalExtension.Where(i => i.Account.MemberNumber == account.MemberNumber).Select(x => x.Movie.Title).Distinct().ToList())
             {
-                Console.WriteLine(rentals.Movie.Title);
+                Console.WriteLine(rentals);
             }
 
             Console.WriteLine();
@@ -464,11 +469,17 @@ namespace MovieApp.Business
                 {
                     rental.DueDate = rental.DueDate.AddDays(7);
                     rental.Account.Balance += rental.Movie.RentalCost;
+                    _rentalsRepo.UpdateDueDate(extend, account.MemberNumber);
                 }
 
-                Console.WriteLine($"Title: {rental.Movie.Title} Due Date: {rental.DueDate}");
+                var title = rental.Movie.Title;
+                var dueDate = rental.DueDate;
+
+                Console.WriteLine($"Title: {title} Due Date: {dueDate}");
                 Console.WriteLine();
             }
+
+
 
         }
 
@@ -515,7 +526,7 @@ namespace MovieApp.Business
         {
             //var returnRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
 
-            var returnRentals = _rentalsRepo.GetAccountRental(account.MemberNumber);
+            var returnRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
 
 
             Console.WriteLine();

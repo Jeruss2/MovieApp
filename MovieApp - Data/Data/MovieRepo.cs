@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace MovieApp.Data
 {
@@ -120,6 +121,11 @@ namespace MovieApp.Data
         //{
         //    return _movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant());
         //}
+
+        public List<Movie> FetchinstockMovieList()
+        {
+            return _instockMovies;
+        }
 
         public Movie FetchMovie(string movieTitle)
         {

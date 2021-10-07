@@ -10,12 +10,14 @@ namespace MovieApp___Business
     {
         private List<Movie> _movies;
         private MovieRepo _movieRepo;
+        private RentalsRepo _rentalsRepo;
 
 
-        public DataCache(MovieRepo movieRepo)
+        public DataCache(MovieRepo movieRepo/*, RentalsRepo rentalsRepo*/)
         {
             _movies = new List<Movie>();
             _movieRepo = movieRepo;
+            //_rentalsRepo = rentalsRepo;
         }
 
 

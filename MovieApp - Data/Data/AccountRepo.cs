@@ -33,7 +33,6 @@ namespace MovieApp.Data
 
         }
 
-
         public List<Account> FetchAllAccounts()
         {
 
@@ -61,7 +60,7 @@ namespace MovieApp.Data
                         account.AccountTypes = reader.GetString(4);
 
                         _accounts.Add(account);
-                        
+
                     }
                 }
 
@@ -70,7 +69,6 @@ namespace MovieApp.Data
             return _accounts;
 
         }
-
 
         public Account FetchOne(string memberNumber, int pin)
         {
@@ -123,7 +121,6 @@ namespace MovieApp.Data
 
 
         }
-
 
         public List<Account> GetAccounts()
         {
