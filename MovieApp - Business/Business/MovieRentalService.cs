@@ -363,7 +363,7 @@ namespace MovieApp.Business
 
         public void ShowPurchasedMovies(Account account)
         {
-            List<Movie> purchased = _movieRepo.GetPurchaseList();
+            List<Movie> purchased = _movieRepo.FetchPurchaseList();
 
             Console.WriteLine();
             Console.WriteLine("Purchased Movies:");
@@ -548,13 +548,13 @@ namespace MovieApp.Business
                 {
                     rentals.DueDate = DateTime.MaxValue;
                     rentals.Account.Balance += rentals.Movie.PurchaseCost;
-                    _movieRepo.InsertIntoPurchase(movie);
+                    _movieRepo.InsertIntoPurchase(movie, account.MemberNumber);
                     _movieRepo.RemoveFromInstock(rentals.Movie);
                     _movieRepo.RemoveFromAllMovies(rentals.Movie);
                     _rentalsRepo.RemoveRentals(rentals);
 
-
-
+                    
+                    
                     _movieRepo.DeleteFromAllMovies(movie);
                     return;
                 }

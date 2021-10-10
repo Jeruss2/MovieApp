@@ -485,7 +485,12 @@ namespace MovieApp.Data
                         movie.PurchaseCost = reader.GetInt32(4);
                         movie.InStock = reader.GetBoolean(5);
 
-                        _instockMovies.Add(movie);
+                        if (_instockMovies.All(m => m.Title != movie.Title))
+                        {
+                            _instockMovies.Add(movie);
+                        }
+
+                        
                     }
                 }
             }
@@ -494,8 +499,46 @@ namespace MovieApp.Data
         }
 
         //Need to look at this one to return all w/o list.
-        public List<Movie> GetPurchaseList()
+        //public List<Movie> GetPurchaseList()
+        //{
+        //    return _purchasedMovies;
+
+        //}
+
+        public List<Movie> FetchPurchaseList()
         {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = "Select Title, Director, ReleaseYear, RentalCost, PurchaseCost, Instock from dbo.PurchasedMovies";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+
+                        Movie movie = new Movie();
+                        movie.Title = reader.GetString(0);
+                        movie.Director = reader.GetString(1);
+                        movie.ReleaseYear = reader.GetInt32(2);
+                        movie.RentalCost = reader.GetInt32(3);
+                        movie.PurchaseCost = reader.GetInt32(4);
+                        movie.InStock = reader.GetBoolean(5);
+
+                        if (_purchasedMovies.All(m => m.Title != movie.Title))
+                        {
+                            _purchasedMovies.Add(movie);
+                        }
+
+                        
+                    }
+                }
+            }
+
             return _purchasedMovies;
         }
 
@@ -514,24 +557,25 @@ namespace MovieApp.Data
 
         //}
 
-        public void InsertIntoPurchase(Movie movie)
+        public void InsertIntoPurchase(Movie movie, string memberNumber)
         {
             string titleMovie = movie.Title;
             string director = movie.Director;
             int releaseYear = movie.ReleaseYear;
             int rentalCost = movie.RentalCost;
             int purchaseCost = movie.RentalCost;
-            bool instock = movie.InStock;
+            bool instock = false;
 
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
 
                 var sqlQuery =
-                    "Insert into dbo.PurchasedMovies values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+                    "Insert into dbo.PurchasedMovies values (@Account, @Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
 
+                command.Parameters.Add("@Account", System.Data.SqlDbType.VarChar).Value = memberNumber;
                 command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
                 command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
                 command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
@@ -585,8 +629,8 @@ namespace MovieApp.Data
                 command1.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int, 50).Value = movie.RentalCost;
                 command1.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int, 50).Value = movie.PurchaseCost;
                 command1.Parameters.Add("@Instock", System.Data.SqlDbType.Bit, 50).Value = movie.InStock;
-                
-                
+
+
                 command2.Parameters.Add("@Title", System.Data.SqlDbType.VarChar, 50).Value = movie.Title;
                 command2.Parameters.Add("@Director", System.Data.SqlDbType.VarChar, 50).Value = movie.Director;
                 command2.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int, 50).Value = movie.ReleaseYear;
