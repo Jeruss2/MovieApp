@@ -77,8 +77,12 @@ namespace MovieApp.Data
                         rentals.RentalDate = reader.GetDateTime(3);
                         rentals.DueDate = reader.GetDateTime(4);
 
+                    
 
                         _rentals.Add(rentals);
+
+                        
+                        
 
                     }
                 }

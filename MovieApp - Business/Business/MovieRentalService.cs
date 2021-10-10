@@ -420,15 +420,25 @@ namespace MovieApp.Business
 
             _accountRepo.Edit(rent.Account);
 
+            var singleList = new List<string>();
 
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
-            foreach (var rental in myRentals.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
+            foreach (var rental in myRentals)
+        
+                //.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
             {
-                Console.WriteLine();
-                Console.WriteLine($"Movie: {rental.Movie.Title} Due Date: {rental.DueDate}");
-                Console.WriteLine();
+                if (!singleList.Contains(rental.Movie.Title.ToString()))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Movie: {rental.Movie.Title} Due Date: {rental.DueDate}");
+                    Console.WriteLine();
+                    singleList.Add(rental.Movie.Title.ToString());
+
+                }
+
+
             }
 
 
@@ -447,6 +457,8 @@ namespace MovieApp.Business
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
+            // first or default
+
             foreach (var rentals in rentalExtension.Where(i => i.Account.MemberNumber == account.MemberNumber).Select(x => x.Movie.Title).Distinct().ToList())
             {
                 Console.WriteLine(rentals);
@@ -463,6 +475,8 @@ namespace MovieApp.Business
             Console.WriteLine("Current Rentals:");
             Console.WriteLine();
 
+            var singleList = new List<string>();
+
             foreach (var rental in rentalExtension)
             {
                 if (rental.Movie.Title.ToLowerInvariant() == extend.ToLowerInvariant())
@@ -475,8 +489,17 @@ namespace MovieApp.Business
                 var title = rental.Movie.Title;
                 var dueDate = rental.DueDate;
 
-                Console.WriteLine($"Title: {title} Due Date: {dueDate}");
-                Console.WriteLine();
+               
+
+                if (!singleList.Contains(title.ToString()))
+                {
+                    Console.WriteLine($"Title: {title} Due Date: {dueDate}");
+                    Console.WriteLine();
+                    singleList.Add(title.ToString());
+
+                }
+
+                
             }
 
 
