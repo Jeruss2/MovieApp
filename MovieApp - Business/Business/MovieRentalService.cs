@@ -327,13 +327,18 @@ namespace MovieApp.Business
             while (true)
             {
                 Console.WriteLine();
-                Console.WriteLine("Enter the title of the movie you would like to browse.");
+                Console.WriteLine("Enter the title of the movie you would like to browse or type Exit.");
 
                 input = Console.ReadLine();
 
                 Console.WriteLine();
 
                 var movie = _movieRepo.GetMovieObj(input);
+
+                if (input == "Exit" || input == "exit")
+                {
+                    break;
+                }
 
                 if (string.IsNullOrWhiteSpace(movie.Title))
                 {
@@ -348,10 +353,7 @@ namespace MovieApp.Business
                 }
 
 
-                if (input == "Exit")
-                {
-                    break;
-                }
+               
             }
 
         }
@@ -426,8 +428,8 @@ namespace MovieApp.Business
             Console.WriteLine("Current Rentals:");
 
             foreach (var rental in myRentals)
-        
-                //.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
+
+            //.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
             {
                 if (!singleList.Contains(rental.Movie.Title.ToString()))
                 {
@@ -489,7 +491,7 @@ namespace MovieApp.Business
                 var title = rental.Movie.Title;
                 var dueDate = rental.DueDate;
 
-               
+
 
                 if (!singleList.Contains(title.ToString()))
                 {
@@ -499,7 +501,7 @@ namespace MovieApp.Business
 
                 }
 
-                
+
             }
 
 
@@ -512,20 +514,30 @@ namespace MovieApp.Business
 
             var rentalPurchase = _rentalsRepo.FetchAccountRental(account.MemberNumber);
 
+            var singleList = new List<string>();
 
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
+            Console.WriteLine();
 
             foreach (var rentals in rentalPurchase)
             {
-                Console.WriteLine(rentals.Movie.Title);
-                Console.WriteLine();
+                if (!singleList.Contains(rentals.Movie.Title.ToString()))
+                {
+
+                    Console.WriteLine(rentals.Movie.Title);
+                    singleList.Add(rentals.Movie.Title.ToString());
+                }
+
 
             }
 
+            Console.WriteLine();
             Console.WriteLine("Enter the title of the movie you would like to purchase.");
 
             var purchase = Console.ReadLine();
+
+            var movie = _movieRepo.GetMovieObj(purchase);
 
             foreach (var rentals in rentalPurchase)
             {
@@ -533,14 +545,15 @@ namespace MovieApp.Business
                 {
                     rentals.DueDate = DateTime.MaxValue;
                     rentals.Account.Balance += rentals.Movie.PurchaseCost;
-                    _movieRepo.InsertIntoPurchase(rentals.Movie);
+                    _movieRepo.InsertIntoPurchase(movie);
                     _movieRepo.RemoveFromInstock(rentals.Movie);
                     _movieRepo.RemoveFromAllMovies(rentals.Movie);
                     _rentalsRepo.RemoveRentals(rentals);
 
-                    var movie = _movieRepo.GetMovieObj(purchase);
+
 
                     _movieRepo.DeleteFromAllMovies(movie);
+                    return;
                 }
             }
         }
