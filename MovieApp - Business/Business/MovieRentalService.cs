@@ -73,7 +73,7 @@ namespace MovieApp.Business
 
             if (userAccount.AccountTypes == /*AccountTypes.Admin*/  "Admin")
             {
-                while (userInput != "6")
+                while (userInput != "7")
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Hi {userAccount.Name}!");
@@ -98,9 +98,12 @@ namespace MovieApp.Business
                             EditAccount();
                             break;
                         case "5":
-                            AddMovie();
+                            ShowMovies();
                             break;
                         case "6":
+                            AddMovie();
+                            break;
+                        case "7":
                             continue;
                     }
 
@@ -637,8 +640,9 @@ namespace MovieApp.Business
             Console.WriteLine("2. Delete Account");
             Console.WriteLine("3. View Accounts");
             Console.WriteLine("4. Edit Accounts");
-            Console.WriteLine("5. Add Movies");
-            Console.WriteLine("6. Continue to Rentals");
+            Console.WriteLine("5. List of Movies");
+            Console.WriteLine("6. Add Movies");
+            Console.WriteLine("7. Continue to Rentals");
             Console.WriteLine();
         }
 
