@@ -77,12 +77,11 @@ namespace MovieApp.Data
                         rentals.RentalDate = reader.GetDateTime(3);
                         rentals.DueDate = reader.GetDateTime(4);
 
-                    
 
-                        _rentals.Add(rentals);
-
-                        
-                        
+                        if (_rentals.All(m => m.Movie.Title != rentals.Movie.Title))
+                        {
+                            _rentals.Add(rentals);
+                        }
 
                     }
                 }

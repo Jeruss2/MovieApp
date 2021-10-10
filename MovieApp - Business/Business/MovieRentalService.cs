@@ -4,7 +4,6 @@ using MovieApp___Business;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace MovieApp.Business
@@ -84,7 +83,7 @@ namespace MovieApp.Business
 
                 switch (userInput)
                 {
-                    case "1": 
+                    case "1":
                         RentalLoop(userAccount);
                         break;
                     case "2":
@@ -122,7 +121,7 @@ namespace MovieApp.Business
 
             }
         }
-            
+
 
         public void RentalLoop(Account userAccount)
         {
@@ -161,8 +160,8 @@ namespace MovieApp.Business
                             AddMovie();
                             break;
                         case "7":
-                           AdminRentalLoop(userAccount);
-                            break;
+                            AdminRentalLoop(userAccount);
+                            return;
                         case "8":
                             Logout();
                             userInput = "9";
@@ -224,7 +223,7 @@ namespace MovieApp.Business
                     }
                 }
             }
-            
+
 
 
         }
@@ -424,7 +423,7 @@ namespace MovieApp.Business
                 }
 
 
-               
+
             }
 
         }
@@ -621,8 +620,8 @@ namespace MovieApp.Business
                     _movieRepo.RemoveFromAllMovies(rentals.Movie);
                     _rentalsRepo.RemoveRentals(rentals);
 
-                    
-                    
+
+
                     _movieRepo.DeleteFromAllMovies(movie);
                     return;
                 }
@@ -633,12 +632,14 @@ namespace MovieApp.Business
         {
             //var returnRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
 
-            var returnRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
-
+            var returningRentals = _rentalsRepo.FetchAccountRental(account.MemberNumber);
+            var returnRentals = returningRentals;
 
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
             Console.WriteLine();
+
+            var singleList = new List<string>();
 
             foreach (var returnRental in returnRentals)
             {
@@ -653,7 +654,7 @@ namespace MovieApp.Business
             var movie = _movieRepo.GetMovieObj(returnedMovie);
 
 
-            foreach (var returnRental in returnRentals)
+            foreach (var returnRental in returnRentals.ToList())
             {
                 if (returnRental.Movie.Title == returnedMovie)
                 {
@@ -683,37 +684,37 @@ namespace MovieApp.Business
             Console.WriteLine();
             Console.WriteLine("Thank you for renting with us!");
             Console.WriteLine();
-           
+
         }
 
         public void Menu()
         {
             Console.WriteLine("Rental Menu");
             Console.WriteLine();
-            Console.WriteLine("1. Browse Movies");
-            Console.WriteLine("2. Rent");
-            Console.WriteLine("3. Extend Rental");
-            Console.WriteLine("4. Purchase Rental");
-            Console.WriteLine("5. Purchased Movies");
-            Console.WriteLine("6. Return Rental");
-            Console.WriteLine("7. Account Balance");
-            Console.WriteLine("8. Logout");
-            Console.WriteLine("9. Exit");
+            Console.WriteLine("1.  Browse Movies");
+            Console.WriteLine("2.  Rent");
+            Console.WriteLine("3.  Extend Rental");
+            Console.WriteLine("4.  Purchase Rental");
+            Console.WriteLine("5.  Purchased Movies");
+            Console.WriteLine("6.  Return Rental");
+            Console.WriteLine("7.  Account Balance");
+            Console.WriteLine("8.  Logout");
+            Console.WriteLine("9.  Exit");
             Console.WriteLine();
         }
         public void MenuForAdmin()
         {
             Console.WriteLine("Rental Menu for Admin");
             Console.WriteLine();
-            Console.WriteLine("1. Admin Menu");
-            Console.WriteLine("2. Browse Movies");
-            Console.WriteLine("3. Rent");
-            Console.WriteLine("4. Extend Rental");
-            Console.WriteLine("5. Purchase Rental");
-            Console.WriteLine("6. Purchased Movies");
-            Console.WriteLine("7. Return Rental");
-            Console.WriteLine("8. Account Balance");
-            Console.WriteLine("9. Logout");
+            Console.WriteLine("1.  Admin Menu");
+            Console.WriteLine("2.  Browse Movies");
+            Console.WriteLine("3.  Rent");
+            Console.WriteLine("4.  Extend Rental");
+            Console.WriteLine("5.  Purchase Rental");
+            Console.WriteLine("6.  Purchased Movies");
+            Console.WriteLine("7.  Return Rental");
+            Console.WriteLine("8.  Account Balance");
+            Console.WriteLine("9.  Logout");
             Console.WriteLine("10. Exit");
             Console.WriteLine();
         }
@@ -721,15 +722,15 @@ namespace MovieApp.Business
         public void AdminMenu()
         {
             Console.WriteLine();
-            Console.WriteLine("1. Create Account");
-            Console.WriteLine("2. Delete Account");
-            Console.WriteLine("3. View Accounts");
-            Console.WriteLine("4. Edit Accounts");
-            Console.WriteLine("5. List of Movies");
-            Console.WriteLine("6. Add Movies");
-            Console.WriteLine("7. Continue to Rentals");
-            Console.WriteLine("8. Log Out");
-            Console.WriteLine("9. Exit");
+            Console.WriteLine("1.  Create Account");
+            Console.WriteLine("2.  Delete Account");
+            Console.WriteLine("3.  View Accounts");
+            Console.WriteLine("4.  Edit Accounts");
+            Console.WriteLine("5.  List of Movies");
+            Console.WriteLine("6.  Add Movies");
+            Console.WriteLine("7.  Continue to Rentals");
+            Console.WriteLine("8.  Log Out");
+            Console.WriteLine("9.  Exit");
             Console.WriteLine();
         }
 
