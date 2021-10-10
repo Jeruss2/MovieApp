@@ -4,6 +4,7 @@ using MovieApp___Business;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace MovieApp.Business
@@ -67,13 +68,69 @@ namespace MovieApp.Business
             return account;
         }
 
+        public void AdminRentalLoop(Account userAccount)
+        {
+            var userInput = "";
+
+            while (userInput != "10")
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Welcome Admin!");
+                Console.WriteLine();
+
+                MenuForAdmin();
+
+                userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1": 
+                        RentalLoop(userAccount);
+                        break;
+                    case "2":
+                        ShowMovies();
+                        BrowseMovies();
+                        //ShowMovies();
+                        break;
+                    case "3":
+                        ShowMovies();
+                        RentMovie(userAccount);
+                        break;
+                    case "4":
+                        ExtendRental(userAccount);
+                        break;
+                    case "5":
+                        PurchaseRental(userAccount);
+                        break;
+                    case "6":
+                        ShowPurchasedMovies(userAccount);
+                        break;
+                    case "7":
+                        ReturnRental(userAccount);
+                        break;
+                    case "8":
+                        AccountBalance(userAccount);
+                        break;
+                    case "9":
+                        Logout();
+                        userInput = "10";
+                        return;
+                    case "10":
+                        Exit();
+                        return;
+                }
+
+            }
+        }
+            
+
         public void RentalLoop(Account userAccount)
         {
             var userInput = "";
 
             if (userAccount.AccountTypes == /*AccountTypes.Admin*/  "Admin")
             {
-                while (userInput != "7")
+                while (userInput is not ("7" and "9"))
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Hi {userAccount.Name}!");
@@ -104,59 +161,70 @@ namespace MovieApp.Business
                             AddMovie();
                             break;
                         case "7":
-                            continue;
+                           AdminRentalLoop(userAccount);
+                            break;
+                        case "8":
+                            Logout();
+                            userInput = "9";
+                            return;
+                        case "9":
+                            Exit();
+                            return;
                     }
 
                 }
 
             }
-
-            while (userInput != "9")
+            else
             {
-                Console.WriteLine();
-                Console.WriteLine($"Hi {userAccount.Name}!");
-                Console.WriteLine();
-
-
-                Menu();
-
-                userInput = Console.ReadLine();
-
-                switch (userInput)
+                while (userInput != "9")
                 {
-                    case "1":
-                        ShowMovies();
-                        BrowseMovies();
-                        //ShowMovies();
-                        break;
-                    case "2":
-                        ShowMovies();
-                        RentMovie(userAccount);
-                        break;
-                    case "3":
-                        ExtendRental(userAccount);
-                        break;
-                    case "4":
-                        PurchaseRental(userAccount);
-                        break;
-                    case "5":
-                        ShowPurchasedMovies(userAccount);
-                        break;
-                    case "6":
-                        ReturnRental(userAccount);
-                        break;
-                    case "7":
-                        AccountBalance(userAccount);
-                        break;
-                    case "8":
-                        Logout();
-                        userInput = "9";
-                        break;
-                    case "9":
-                        Exit();
-                        break;
+                    Console.WriteLine();
+                    Console.WriteLine($"Hi {userAccount.Name}!");
+                    Console.WriteLine();
+
+
+                    Menu();
+
+                    userInput = Console.ReadLine();
+
+                    switch (userInput)
+                    {
+                        case "1":
+                            ShowMovies();
+                            BrowseMovies();
+                            //ShowMovies();
+                            break;
+                        case "2":
+                            ShowMovies();
+                            RentMovie(userAccount);
+                            break;
+                        case "3":
+                            ExtendRental(userAccount);
+                            break;
+                        case "4":
+                            PurchaseRental(userAccount);
+                            break;
+                        case "5":
+                            ShowPurchasedMovies(userAccount);
+                            break;
+                        case "6":
+                            ReturnRental(userAccount);
+                            break;
+                        case "7":
+                            AccountBalance(userAccount);
+                            break;
+                        case "8":
+                            Logout();
+                            userInput = "9";
+                            break;
+                        case "9":
+                            Exit();
+                            break;
+                    }
                 }
             }
+            
 
 
         }
@@ -615,6 +683,7 @@ namespace MovieApp.Business
             Console.WriteLine();
             Console.WriteLine("Thank you for renting with us!");
             Console.WriteLine();
+           
         }
 
         public void Menu()
@@ -632,6 +701,22 @@ namespace MovieApp.Business
             Console.WriteLine("9. Exit");
             Console.WriteLine();
         }
+        public void MenuForAdmin()
+        {
+            Console.WriteLine("Rental Menu for Admin");
+            Console.WriteLine();
+            Console.WriteLine("1. Admin Menu");
+            Console.WriteLine("2. Browse Movies");
+            Console.WriteLine("3. Rent");
+            Console.WriteLine("4. Extend Rental");
+            Console.WriteLine("5. Purchase Rental");
+            Console.WriteLine("6. Purchased Movies");
+            Console.WriteLine("7. Return Rental");
+            Console.WriteLine("8. Account Balance");
+            Console.WriteLine("9. Logout");
+            Console.WriteLine("10. Exit");
+            Console.WriteLine();
+        }
 
         public void AdminMenu()
         {
@@ -643,6 +728,8 @@ namespace MovieApp.Business
             Console.WriteLine("5. List of Movies");
             Console.WriteLine("6. Add Movies");
             Console.WriteLine("7. Continue to Rentals");
+            Console.WriteLine("8. Log Out");
+            Console.WriteLine("9. Exit");
             Console.WriteLine();
         }
 
