@@ -85,7 +85,7 @@ namespace MovieApp.Business
                 {
                     case "1":
                         RentalLoop(userAccount);
-                        break;
+                        return;
                     case "2":
                         ShowMovies();
                         BrowseMovies();
@@ -215,10 +215,10 @@ namespace MovieApp.Business
                         case "8":
                             Logout();
                             userInput = "9";
-                            break;
+                            return;
                         case "9":
                             Exit();
-                            break;
+                            return;
                     }
                 }
             }
