@@ -1,0 +1,346 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\RentalServicesWebApp\\RentalServicesWebApp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj",
+        "projectName": "MovieApp - Business",
+        "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj",
+        "packagesPath": "C:\\Users\\jerus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jerus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj",
+        "projectName": "MovieApp - Data",
+        "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj",
+        "packagesPath": "C:\\Users\\jerus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jerus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj",
+        "projectName": "MovieApp - Models",
+        "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj",
+        "packagesPath": "C:\\Users\\jerus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jerus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj",
+        "projectName": "MovieApp",
+        "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj",
+        "packagesPath": "C:\\Users\\jerus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jerus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\jerus\\source\\repos\\MovieApp\\RentalServicesWebApp\\RentalServicesWebApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jerus\\source\\repos\\MovieApp\\RentalServicesWebApp\\RentalServicesWebApp.csproj",
+        "projectName": "RentalServicesWebApp",
+        "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\RentalServicesWebApp\\RentalServicesWebApp.csproj",
+        "packagesPath": "C:\\Users\\jerus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\RentalServicesWebApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jerus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Business\\MovieApp - Business.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Data\\MovieApp - Data.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp - Models\\MovieApp - Models.csproj"
+              },
+              "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj": {
+                "projectPath": "C:\\Users\\jerus\\source\\repos\\MovieApp\\MovieApp\\MovieApp.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

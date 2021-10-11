@@ -89,7 +89,6 @@ namespace MovieApp.Business
                     case "2":
                         ShowMovies();
                         BrowseMovies();
-                        //ShowMovies();
                         break;
                     case "3":
                         ShowMovies();
@@ -497,9 +496,7 @@ namespace MovieApp.Business
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
-            foreach (var rental in myRentals)
-
-            //.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
+            foreach (var rental in myRentals.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
             {
                 if (!singleList.Contains(rental.Movie.Title.ToString()))
                 {

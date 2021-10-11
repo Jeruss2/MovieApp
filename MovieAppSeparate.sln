@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieApp - Models", "MovieA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieApp", "MovieApp\MovieApp.csproj", "{5DA2D24F-67DE-481E-B2CA-0EAFF6C6AE0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalServicesWebApp", "RentalServicesWebApp\RentalServicesWebApp.csproj", "{B465E64B-5185-41C2-9D51-BD6B90182471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5DA2D24F-67DE-481E-B2CA-0EAFF6C6AE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA2D24F-67DE-481E-B2CA-0EAFF6C6AE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA2D24F-67DE-481E-B2CA-0EAFF6C6AE0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B465E64B-5185-41C2-9D51-BD6B90182471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B465E64B-5185-41C2-9D51-BD6B90182471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B465E64B-5185-41C2-9D51-BD6B90182471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B465E64B-5185-41C2-9D51-BD6B90182471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
