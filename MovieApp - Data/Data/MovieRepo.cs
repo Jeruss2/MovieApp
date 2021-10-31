@@ -172,7 +172,6 @@ namespace MovieApp.Data
 
         }
 
-
         public void DisplayMovieDetails(Movie movie)
         {
             Console.WriteLine($"Title: {movie.Title}");
@@ -182,7 +181,6 @@ namespace MovieApp.Data
             Console.WriteLine($"Purchase Cost: ${movie.PurchaseCost}");
 
         }
-
 
         //public void ShowMovieDetails(string movieTitle)
         //{
@@ -205,36 +203,36 @@ namespace MovieApp.Data
         //{
         //    _movies.Remove(_movies.FirstOrDefault(x => x.Title.ToLowerInvariant() == movieTitle.ToLowerInvariant()));
         //}
-        public void AddToAllMovies(Movie movie)
-        {
-            string titleMovie = movie.Title;
-            string director = movie.Director;
-            int releaseYear = movie.ReleaseYear;
-            int rentalCost = movie.RentalCost;
-            int purchaseCost = movie.RentalCost;
-            bool instock = movie.InStock;
+        //public void AddToAllMovies(Movie movie)
+        //{
+        //    string titleMovie = movie.Title;
+        //    string director = movie.Director;
+        //    int releaseYear = movie.ReleaseYear;
+        //    int rentalCost = movie.RentalCost;
+        //    int purchaseCost = movie.RentalCost;
+        //    bool instock = movie.InStock;
 
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
+        //    using (SqlConnection connection = new SqlConnection(_connectionString))
+        //    {
 
-                var sqlQuery = "Insert into dbo.Movie values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
+        //        var sqlQuery = "Insert into dbo.Movie values (@Title, @Director, @ReleaseYear, @RentalCost, @PurchaseCost, @Instock)";
 
-                SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //        SqlCommand command = new SqlCommand(sqlQuery, connection);
 
-                command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
-                command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
-                command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
-                command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
-                command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
-                command.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
+        //        command.Parameters.Add("@Title", System.Data.SqlDbType.VarChar).Value = titleMovie;
+        //        command.Parameters.Add("@Director", System.Data.SqlDbType.VarChar).Value = director;
+        //        command.Parameters.Add("@ReleaseYear", System.Data.SqlDbType.Int).Value = releaseYear;
+        //        command.Parameters.Add("@RentalCost", System.Data.SqlDbType.Int).Value = rentalCost;
+        //        command.Parameters.Add("@PurchaseCost", System.Data.SqlDbType.Int).Value = purchaseCost;
+        //        command.Parameters.Add("@Instock", System.Data.SqlDbType.Int).Value = instock;
 
 
-                connection.Open();
-                command.ExecuteNonQuery();
+        //        connection.Open();
+        //        command.ExecuteNonQuery();
 
-            }
-        }
+        //    }
+        //}
 
         public void DeleteFromAllMovies(Movie movie)
         {
@@ -459,7 +457,6 @@ namespace MovieApp.Data
 
         }
 
-
         //Need to look at this one to return all w/o list.
         public List<Movie> FetchInstockMovies()
         {
@@ -490,7 +487,7 @@ namespace MovieApp.Data
                             _instockMovies.Add(movie);
                         }
 
-                        
+
                     }
                 }
             }
@@ -534,14 +531,13 @@ namespace MovieApp.Data
                             _purchasedMovies.Add(movie);
                         }
 
-                        
+
                     }
                 }
             }
 
             return _purchasedMovies;
         }
-
 
         //public void AddPurchase(string movie)
         //{
@@ -591,11 +587,11 @@ namespace MovieApp.Data
             }
         }
 
-        public void AddNewMovies(Movie movie)
-        {
-            _movies.Add(movie);
-            _instockMovies.Add(movie);
-        }
+        //public void AddNewMovies(Movie movie)
+        //{
+        //    _movies.Add(movie);
+        //    _instockMovies.Add(movie);
+        //}
 
         //Need to refactor this - really ugly right now
         public void CreateNewMovie(Movie movie)

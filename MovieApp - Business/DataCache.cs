@@ -13,11 +13,11 @@ namespace MovieApp___Business
         private RentalsRepo _rentalsRepo;
 
 
-        public DataCache(MovieRepo movieRepo/*, RentalsRepo rentalsRepo*/)
+        public DataCache(MovieRepo movieRepo)
         {
             _movies = new List<Movie>();
             _movieRepo = movieRepo;
-            //_rentalsRepo = rentalsRepo;
+
         }
 
 
@@ -25,7 +25,7 @@ namespace MovieApp___Business
         {
             var m = _movies.SingleOrDefault(m => m.Title == title);
 
-            //return m;
+
             if (m != null)
             {
                 return m;

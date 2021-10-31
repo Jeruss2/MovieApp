@@ -12,8 +12,6 @@ namespace MovieApp.Data
 
         private List<Rentals> _rentals;
         private string _connectionString;
-        //private List<RentalsRepoTest> _rentalsTests;
-
 
         public RentalsRepo(string connectionString)
         {
@@ -28,12 +26,11 @@ namespace MovieApp.Data
             //_rentalsTests = new List<RentalsRepoTest>();
         }
 
-
         //Gives me the list of all rentals
-        public List<Rentals> GetRentals()
-        {
-            return _rentals;
-        }
+        //public List<Rentals> GetRentals()
+        //{
+        //    return _rentals;
+        //}
 
         //Gives me the list of rentals for each account
         public List<Rentals> GetAccountRental(string acctNumber)

@@ -121,7 +121,6 @@ namespace MovieApp.Business
             }
         }
 
-
         public void RentalLoop(Account userAccount)
         {
             var userInput = "";
@@ -293,8 +292,6 @@ namespace MovieApp.Business
             Console.WriteLine($"Account Balance: ${account.Balance}");
         }
 
-
-        //!! this works
         public void AddMovie()
         {
             var movie = new Movie();
@@ -496,7 +493,7 @@ namespace MovieApp.Business
             Console.WriteLine();
             Console.WriteLine("Current Rentals:");
 
-            foreach (var rental in myRentals.Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
+            foreach (var rental in myRentals.OrderBy(x => x.Movie.Title).Where(x => x.Account.MemberNumber == account.MemberNumber).Distinct())
             {
                 if (!singleList.Contains(rental.Movie.Title.ToString()))
                 {
@@ -546,7 +543,7 @@ namespace MovieApp.Business
 
             var singleList = new List<string>();
 
-            foreach (var rental in rentalExtension)
+            foreach (var rental in rentalExtension.OrderBy(x => x.Movie.Title))
             {
                 if (rental.Movie.Title.ToLowerInvariant() == extend.ToLowerInvariant())
                 {
@@ -699,6 +696,7 @@ namespace MovieApp.Business
             Console.WriteLine("9.  Exit");
             Console.WriteLine();
         }
+
         public void MenuForAdmin()
         {
             Console.WriteLine("Rental Menu for Admin");

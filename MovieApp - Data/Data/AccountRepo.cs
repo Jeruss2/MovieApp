@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace MovieApp.Data
 {
@@ -122,20 +121,20 @@ namespace MovieApp.Data
 
         }
 
-        public List<Account> GetAccounts()
-        {
-            return _accounts;
-        }
+        //public List<Account> GetAccounts()
+        //{
+        //    return _accounts;
+        //}
 
-        public Account GetAccount(string acctNumber, int pin)
-        {
-            return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber && x.Pin == pin);
-        }
+        //public Account GetAccount(string acctNumber, int pin)
+        //{
+        //    return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber && x.Pin == pin);
+        //}
 
-        public Account GetAcct(string acctNumber)
-        {
-            return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber);
-        }
+        //public Account GetAcct(string acctNumber)
+        //{
+        //    return _accounts.FirstOrDefault(x => x.MemberNumber == acctNumber);
+        //}
 
         public Account FetchSingleAccount(string acctNumber)
         {
@@ -241,7 +240,6 @@ namespace MovieApp.Data
         //{
         //    _accounts.Remove(_accounts.FirstOrDefault(x => x.MemberNumber == account.MemberNumber));
         //}
-
 
         public void Delete(Account account)
         {

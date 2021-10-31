@@ -15,26 +15,11 @@ namespace MovieApp
             var movie = new MovieRepo(connection);
             var rental = new RentalsRepo(connection);
 
-
-
-
             var service = new MovieRentalService(acc, movie, rental);
 
             Account account = service.Login();
 
             service.RentalLoop(account);
-
-
-
-            //var troy = movie.FetchMovie("Troy");
-
-            //Console.WriteLine(troy.Title);
-            //Console.WriteLine(troy.Director);
-
-
-
-
-
 
         }
     }
