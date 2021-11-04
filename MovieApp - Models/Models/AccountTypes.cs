@@ -3,7 +3,8 @@
     public enum AccountTypes
     {
         Admin,
-        Member
+        Member,
+        Guest
     }
 
 }

@@ -10,6 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\MoviePicture.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MovieApp - Business\MovieApp - Business.csproj" />
     <ProjectReference Include="..\MovieApp - Data\MovieApp - Data.csproj" />
     <ProjectReference Include="..\MovieApp - Models\MovieApp - Models.csproj" />

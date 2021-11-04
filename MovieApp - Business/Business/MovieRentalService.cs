@@ -24,7 +24,7 @@ namespace MovieApp.Business
 
         }
 
-        //Need to fix login to exit after number of tries
+
 
         public Account Login()
         {
@@ -43,8 +43,6 @@ namespace MovieApp.Business
 
                 var acctPin = int.Parse(Console.ReadLine());
 
-                //account = _accountRepo.GetAccount(memNumber, acctPin);
-
                 account = _accountRepo.FetchOne(memNumber, acctPin);
 
 
@@ -56,7 +54,7 @@ namespace MovieApp.Business
                 if (i > 2)
                 {
                     Console.WriteLine("You have reach the maximum number of login attempts");
-                    //break;
+
                     Exit();
                 }
 
@@ -125,7 +123,7 @@ namespace MovieApp.Business
         {
             var userInput = "";
 
-            if (userAccount.AccountTypes == /*AccountTypes.Admin*/  "Admin")
+            if (userAccount.AccountTypes == "Admin")
             {
                 while (userInput is not ("7" and "9"))
                 {
@@ -172,53 +170,51 @@ namespace MovieApp.Business
                 }
 
             }
-            else
+
+            while (userInput != "9")
             {
-                while (userInput != "9")
+                Console.WriteLine();
+                Console.WriteLine($"Hi {userAccount.Name}!");
+                Console.WriteLine();
+
+
+                Menu();
+
+                userInput = Console.ReadLine();
+
+                switch (userInput)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine($"Hi {userAccount.Name}!");
-                    Console.WriteLine();
-
-
-                    Menu();
-
-                    userInput = Console.ReadLine();
-
-                    switch (userInput)
-                    {
-                        case "1":
-                            ShowMovies();
-                            BrowseMovies();
-                            //ShowMovies();
-                            break;
-                        case "2":
-                            ShowMovies();
-                            RentMovie(userAccount);
-                            break;
-                        case "3":
-                            ExtendRental(userAccount);
-                            break;
-                        case "4":
-                            PurchaseRental(userAccount);
-                            break;
-                        case "5":
-                            ShowPurchasedMovies(userAccount);
-                            break;
-                        case "6":
-                            ReturnRental(userAccount);
-                            break;
-                        case "7":
-                            AccountBalance(userAccount);
-                            break;
-                        case "8":
-                            Logout();
-                            userInput = "9";
-                            return;
-                        case "9":
-                            Exit();
-                            return;
-                    }
+                    case "1":
+                        ShowMovies();
+                        BrowseMovies();
+                        //ShowMovies();
+                        break;
+                    case "2":
+                        ShowMovies();
+                        RentMovie(userAccount);
+                        break;
+                    case "3":
+                        ExtendRental(userAccount);
+                        break;
+                    case "4":
+                        PurchaseRental(userAccount);
+                        break;
+                    case "5":
+                        ShowPurchasedMovies(userAccount);
+                        break;
+                    case "6":
+                        ReturnRental(userAccount);
+                        break;
+                    case "7":
+                        AccountBalance(userAccount);
+                        break;
+                    case "8":
+                        Logout();
+                        userInput = "9";
+                        return;
+                    case "9":
+                        Exit();
+                        return;
                 }
             }
 
@@ -446,8 +442,6 @@ namespace MovieApp.Business
 
             rent.RentalDate = DateTime.Now;
             rent.DueDate = DateTime.Now.AddDays(7);
-
-            // do while - compare to list of movies
 
             var instock = _movieRepo.FetchinstockMovieList() ?? _movieRepo.FetchInstockMovies();
 
@@ -727,6 +721,16 @@ namespace MovieApp.Business
             Console.WriteLine("8.  Log Out");
             Console.WriteLine("9.  Exit");
             Console.WriteLine();
+        }
+
+
+        public void GuestMenu()
+        {
+            Console.WriteLine("Guest Menu");
+            Console.WriteLine();
+            Console.WriteLine("1.  Browse Movies");
+            Console.WriteLine("2.  Logout");
+            Console.WriteLine("3.  Exit");
         }
 
 
