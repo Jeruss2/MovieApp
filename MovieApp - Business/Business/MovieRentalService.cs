@@ -124,7 +124,7 @@ namespace MovieApp.Business
 
             if (userAccount.AccountTypes == "ADMIN")
             {
-                while (userInput is not ("7" and "9"))
+                while (true)
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Welcome Admin!");
@@ -459,7 +459,7 @@ namespace MovieApp.Business
             var instock = _movieRepo.FetchinstockMovieList() ?? _movieRepo.FetchInstockMovies();
 
 
-            var matches = "";
+            //var matches = "";
 
 
             while (true)
