@@ -23,8 +23,8 @@ C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.Generate
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.AssemblyInfoInputs.cache
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.AssemblyInfo.cs
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.CoreCompileInputs.cache
-C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.CopyComplete
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\ref\MovieApp.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.pdb
 C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.genruntimeconfig.cache
+C:\Users\jerus\source\repos\MovieApp\MovieApp\obj\Debug\net5.0\MovieApp.csproj.CopyComplete

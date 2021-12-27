@@ -20,15 +20,7 @@ namespace MovieApp.Data
 
             _connectionString = connectionString;
 
-            _accounts = new List<Account>()
-            {
-                //This is my lists - commented out to use SQL!
-
-
-                //new Account(){MemberNumber = "123", Pin = 123, Name = "Josh", Balance = 0.00m, AccountTypes = AccountTypes.Admin},
-                //new Account(){MemberNumber = "456", Pin = 456, Name = "Evan", Balance = 0.00m, AccountTypes = AccountTypes.Member}
-            };
-
+            _accounts = new List<Account>();
 
         }
 

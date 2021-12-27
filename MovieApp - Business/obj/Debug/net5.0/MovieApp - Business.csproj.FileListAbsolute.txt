@@ -28,7 +28,7 @@ C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieA
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.AssemblyInfoInputs.cache
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.AssemblyInfo.cs
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.csproj.CoreCompileInputs.cache
-C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.csproj.CopyComplete
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\ref\MovieApp - Business.dll
 C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.pdb
+C:\Users\jerus\source\repos\MovieApp\MovieApp - Business\obj\Debug\net5.0\MovieApp - Business.csproj.CopyComplete

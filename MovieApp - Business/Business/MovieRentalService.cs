@@ -13,8 +13,7 @@ namespace MovieApp.Business
         private AccountRepo _accountRepo;
         private MovieRepo _movieRepo;
         private RentalsRepo _rentalsRepo;
-
-
+        
 
         public MovieRentalService(AccountRepo accountRepo, MovieRepo movieRepo, RentalsRepo rentalsRepo)
         {
@@ -24,8 +23,8 @@ namespace MovieApp.Business
 
         }
 
-
-
+       
+        
         public Account Login()
         {
             Account account = null;
