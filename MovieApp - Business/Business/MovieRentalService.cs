@@ -13,7 +13,7 @@ namespace MovieApp.Business
         private AccountRepo _accountRepo;
         private MovieRepo _movieRepo;
         private RentalsRepo _rentalsRepo;
-        
+
 
         public MovieRentalService(AccountRepo accountRepo, MovieRepo movieRepo, RentalsRepo rentalsRepo)
         {
@@ -23,8 +23,8 @@ namespace MovieApp.Business
 
         }
 
-       
-        
+
+
         public Account Login()
         {
             Account account = null;
@@ -71,7 +71,7 @@ namespace MovieApp.Business
             while (userInput != "10")
             {
                 Console.WriteLine();
-                Console.WriteLine($"Welcome Admin!");
+                Console.WriteLine($"Hi {userAccount.Name}!");
                 Console.WriteLine();
 
                 MenuForAdmin();
@@ -122,12 +122,12 @@ namespace MovieApp.Business
         {
             var userInput = "";
 
-            if (userAccount.AccountTypes == "Admin")
+            if (userAccount.AccountTypes == "ADMIN")
             {
                 while (userInput is not ("7" and "9"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"Hi {userAccount.Name}!");
+                    Console.WriteLine($"Welcome Admin!");
                     Console.WriteLine();
 
                     AdminMenu();
@@ -235,7 +235,14 @@ namespace MovieApp.Business
 
             Console.WriteLine("Enter Account Type");
 
-            memberAccount.AccountTypes = Console.ReadLine();
+            var acctType = Console.ReadLine();
+
+            if (acctType.ToUpper() != "ADMIN")
+            {
+                acctType = "MEMBER";
+            }
+
+            memberAccount.AccountTypes = acctType.ToUpper();
 
             // memberAccount.AccountTypes = accountType.ToLowerInvariant() == "admin" ? AccountTypes.Admin : AccountTypes.Member;
 
@@ -260,9 +267,9 @@ namespace MovieApp.Business
 
             var allAccount = _accountRepo.FetchSingleAccount(deleteAccount);
 
-            //_accountRepo.RemoveAccount(allAccount);
 
             _accountRepo.Delete(allAccount);
+
 
         }
 
@@ -337,13 +344,20 @@ namespace MovieApp.Business
             accountsList.Balance = decimal.Parse(Console.ReadLine());
 
             Console.WriteLine("What type of account should this be?");
-            accountsList.AccountTypes = Console.ReadLine();
+            var acctType = Console.ReadLine();
 
-            //account.AccountTypes = accountType.ToLowerInvariant() == "Admin".ToLowerInvariant() ? AccountTypes.Admin : AccountTypes.Member;
+            if (acctType.ToUpper() != "ADMIN")
+            {
+                acctType = "MEMBER";
+            }
+
+            accountsList.AccountTypes = acctType.ToUpper();
+
+
 
 
             _accountRepo.Edit(accountsList);
-            //}
+
 
 
 

@@ -24,8 +24,11 @@ namespace MovieApp.Data
 
         }
 
+
         public List<Account> FetchAllAccounts()
         {
+
+            var currentAccountList = new List<Account>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -46,20 +49,66 @@ namespace MovieApp.Data
                         account.Name = reader.GetString(2);
                         account.Balance = reader.GetDecimal(3);
 
-                        //Figure out how to retrive enum
+                        
 
                         account.AccountTypes = reader.GetString(4);
 
-                        _accounts.Add(account);
+
+                        //removed adding to _accounts since I need a new one each time for ViewAccounts
+
+                        //_accounts.Add(account);
+
+
+                        currentAccountList.Add(account);
 
                     }
                 }
 
             }
 
-            return _accounts;
+            return currentAccountList;
 
         }
+
+        // ***Replaced this to create a new list each time***
+
+
+        //public List<Account> FetchAllAccounts()
+        //{
+
+        //    using (SqlConnection connection = new SqlConnection(_connectionString))
+        //    {
+        //        var sqlQuery = "Select * from dbo.Account";
+
+        //        SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+        //        connection.Open();
+        //        SqlDataReader reader = command.ExecuteReader();
+
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                Account account = new Account();
+        //                account.MemberNumber = reader.GetString(0);
+        //                account.Pin = reader.GetInt32(1);
+        //                account.Name = reader.GetString(2);
+        //                account.Balance = reader.GetDecimal(3);
+
+        //                //Figure out how to retrive enum
+
+        //                account.AccountTypes = reader.GetString(4);
+
+        //                _accounts.Add(account);
+
+        //            }
+        //        }
+
+        //    }
+
+        //    return _accounts;
+
+        //}
 
         public Account FetchOne(string memberNumber, int pin)
         {
