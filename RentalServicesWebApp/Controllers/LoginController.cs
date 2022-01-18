@@ -17,10 +17,6 @@ namespace RentalServicesWebApp.Controllers
             return View();
         }
 
-        //public IActionResult ProcessLogin(Account account)
-        //{
-            
-
-        //}
+        
     }
 }

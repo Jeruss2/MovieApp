@@ -10,7 +10,7 @@ namespace MovieApp___Business
     {
         private List<Movie> _movies;
         private MovieRepo _movieRepo;
-        private RentalsRepo _rentalsRepo;
+        //private RentalsRepo _rentalsRepo;
 
 
         public DataCache(MovieRepo movieRepo)
